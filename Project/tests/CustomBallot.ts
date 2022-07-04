@@ -32,7 +32,7 @@ describe("Ballot", function () {
       ethers.getContractFactory("CustomBallot"),
       ethers.getContractFactory("MyToken"),
     ]);
-    tokenContract = await tokenContractFactory.deploy();
+    tokenContract = (await tokenContractFactory.deploy()) as any;
     await tokenContract.deployed();
   });
 
@@ -71,10 +71,10 @@ describe("Ballot", function () {
 
   describe("when the ballot contract is deployed", async () => {
     beforeEach(async () => {
-      ballotContract = await ballotFactory.deploy(
+      ballotContract = (await ballotFactory.deploy(
         convertStringArrayToBytes32(PROPOSALS),
         tokenContract.address
-      );
+      )) as any;
       await ballotContract.deployed();
     });
 
