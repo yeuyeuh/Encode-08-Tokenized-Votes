@@ -20,7 +20,7 @@ contract CustomBallot {
 
     mapping(address => uint256) public spentVotePower;
 
-    Proposal[] public proposals;
+    Proposal[] internal proposals;
     IERC20Votes public voteToken;
     uint256 public referenceBlock;
 
@@ -58,5 +58,9 @@ contract CustomBallot {
         votingPower_ =
             voteToken.getPastVotes(msg.sender, referenceBlock) -
             spentVotePower[msg.sender];
+    }
+
+    function getProposalName(uint256 index) public view returns (bytes32) {
+        return proposals[index].name;
     }
 }
